@@ -14,7 +14,10 @@ SECRET_KEY = '-&@nw-%%57m0xvv@febg7v)3pf5s5_y__odg5jf)s8$k@!x9fy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['expensety.herokuapp.com']
+ALLOWED_HOSTS = [
+            'expensety.herokuapp.com',
+            '127.0.0.1'
+         ]
 
 
 # Application definition
@@ -26,6 +29,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+    'corsheaders',
+
+    'users',
+    'todos',
+    
 ]
 
 MIDDLEWARE = [
@@ -69,6 +81,21 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Password validation
